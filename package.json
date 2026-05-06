@@ -1,0 +1,32 @@
+{
+  "name": "payment-processing-system",
+  "version": "1.0.0",
+  "description": "Production-grade payment processing system with retry logic, idempotency, and circuit breaker",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "jest --forceExit",
+    "test:unit": "jest tests/unit --forceExit",
+    "test:integration": "jest tests/integration --forceExit",
+    "test:coverage": "jest --coverage --forceExit",
+    "migrate": "node src/db/migrate.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^9.6.0",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.3.1",
+    "pino": "^9.2.0",
+    "pino-http": "^10.2.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "pino-pretty": "^11.2.1",
+    "supertest": "^7.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testTimeout": 30000
+  }
+}
