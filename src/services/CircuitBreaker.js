@@ -91,6 +91,7 @@ class CircuitBreaker {
     } else if (newState === STATES.CLOSED) {
       this._failureCount = 0;
       this._openedAt = null;
+      this._probeInFlight = false;
       logger.info({ event: 'circuit.closed' }, 'Circuit breaker closed — gateway recovered');
     }
   }
