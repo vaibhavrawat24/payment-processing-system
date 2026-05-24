@@ -82,6 +82,7 @@ class CircuitBreaker {
     if (newState === STATES.OPEN) {
       this._openedAt = Date.now();
       this._successCount = 0;
+      this._probeInFlight = false;
       logger.warn(
         { event: 'circuit.opened', previousState: prev, failureCount: this._failureCount },
         'Circuit breaker opened'
