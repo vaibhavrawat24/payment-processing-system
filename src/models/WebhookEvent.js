@@ -11,12 +11,13 @@ class WebhookEvent {
 
   create({ id, paymentId, eventType, payload }) {
     const now = Date.now();
-    this.db.prepare(`
+    const result = this.db.prepare(`
       INSERT OR IGNORE INTO webhook_events (id, payment_id, event_type, payload, status, created_at)
       VALUES (?, ?, ?, ?, 'pending', ?)
     `).run(id, paymentId, eventType, JSON.stringify(payload), now);
 
     // Returns null if INSERT was ignored (duplicate), otherwise the new row
+    if (result.changes === 0) return null;
     return this.findById(id);
   }
 
